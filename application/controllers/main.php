@@ -12,7 +12,6 @@ class Main extends CI_Controller
 
 	public function index()
     {
-        // login?
         $postList = $this->post_model->getList('post');
 		$this->load->view('head');
         $this->load->view('main', array('postList'=>$postList));

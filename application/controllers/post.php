@@ -14,25 +14,34 @@ class Post extends CI_Controller
 
 	public function index()
 	{
-        $this->load->view('head');
-        if (!$this->input->post()) {
-            $this->load->view('writePost');
-        } else {
-            $data=array(
-                'title'=> $this->input->post('title'),
-                'description'=> $this->input->post('description'),
-                'content'=> $this->input->post('content'),
-                'userId'=>'1');
-            $post_id = $this->post_model->add($data);
+        if (!$this->session->userdata('is_login')) {
             $this->load->helper('url');
-            redirect('/post/get/'.$post_id);
+            redirect('/auth/login');
         }
 
+        $this->load->view('head');
+        $this->load->view('writePost');
         $this->load->view('footer');
 	}
 
+	public function add()
+    {
+        $data=array(
+            'title'=> $this->input->post('title'),
+            'subtitle'=> $this->input->post('subtitle'),
+            'content'=> $this->input->post('content'),
+            'author'=> $this->session->userdata('username'),
+            'userId'=>  $this->session->userdata('PK_USER_ID'));
+        $post_id = $this->post_model->add($data);
+        $this->load->helper('url');
+        redirect('/post/get/'.$post_id);
+    }
 	public function get($postId)
     {
+        if (!$this->session->userdata('is_login')) {
+            $this->load->helper('url');
+            redirect('/auth/login');
+        }
         $post=$this->post_model->get($postId);
         $commentList=$this->comment_model->getList($postId);
         $this->load->view('head');
@@ -50,7 +59,7 @@ class Post extends CI_Controller
         } else {
             $data=array(
                 'title'=> $this->input->post('title'),
-                'description'=> $this->input->post('description'),
+                'subtitle'=> $this->input->post('subtitle'),
                 'content'=> $this->input->post('content'),
                 'PK_POST_ID'=>$postId);
             $this->post_model->update($data);

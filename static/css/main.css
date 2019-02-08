@@ -1,0 +1,42 @@
+.post-container {
+    font-size: 16px;
+    color: black;
+}
+.post-list {
+    border-bottom: lightgrey 1px solid;
+    padding: 20px 0;
+    width: 100%;
+    color: black;
+}
+
+.post-list-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+}
+
+.post-list-title {
+    font-size: 20px;
+    color: #1a1a1a;
+}
+
+.post-list-subtitle {
+    color: dimgrey;
+}
+
+#post-autor {
+    font-size: 16px;
+}
+#post-date {
+    font-size: 13px;
+}
+.main {
+    width: 100%;
+    height: 90%;
+    align-items: start;
+}
+
+dl {
+    margin-bottom: 5px;
+}

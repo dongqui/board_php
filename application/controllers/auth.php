@@ -20,18 +20,21 @@ class Auth extends CI_Controller {
         $userId = $this->input->post('userId');
         $password = $this->input->post('password');
         $user = $this->user_model->getByUserId($userId);
-        $this->load->helper('url');
+
         if ($user && password_verify($password, $user->password)) {
-            $sessionData = array(
-                'userId'  => $user->userId,
-                'is_login' => true
-            );
-            $this->session->set_userdata($sessionData);
-            redirect('/main');
+            $this->_setLoginSession($user);
         } else {
+            $this->load->helper('url');
             redirect('/auth/login');
         }
 
+    }
+
+    function logout()
+    {
+        $this->session->sess_destroy();
+        $this->load->helper('url');
+        redirect('/main');
     }
 
     function register()
@@ -47,10 +50,22 @@ class Auth extends CI_Controller {
                 'email'=> $this->input->post('email'),
                 'password'=> $password_bycrypted,
                 );
-            $this->user_model->register($data);
-            $this->load->helper('url');
-            redirect('/main');
+            $user = $this->user_model->register($data);
+            $this->_setLoginSession($user);
         }
 
+    }
+
+    function _setLoginSession($user)
+    {
+        $sessionData = array(
+            'username'  => $user->userId,
+            'PK_USER_ID' => $user->PK_USER_ID,
+            'is_login' => true
+        );
+        $this->session->set_userdata($sessionData);
+
+        $this->load->helper('url');
+        redirect('/main');
     }
 }

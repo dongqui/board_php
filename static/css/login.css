@@ -1,0 +1,31 @@
+.login-container {
+    margin: 20% auto;
+    width: 50%;
+    border: lightgrey 1px solid;
+    padding: 50px 50px 40px 50px;
+}
+
+.login-input {
+    width: 100%;
+    display: block;
+    font-size: 1em;
+    margin: 1px 0;
+    border: none;
+    border-bottom: lightgrey 1px solid;
+}
+
+.login-input-group {
+    margin-bottom: 30px;
+}
+
+.login-input:focus {
+    outline: none;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: #1a1a1a;
+    border: none;
+    padding: 10px 0;
+    margin: 1px 0;
+}

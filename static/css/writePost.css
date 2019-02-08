@@ -1,0 +1,30 @@
+#post-input-title {
+    display: block;
+    width: 100%;
+}
+
+#post-input-subtitle {
+    display: block;
+    width: 100%;
+}
+#post-input-content {
+    display: block;
+    width: 100%;
+    height: 300px;
+}
+
+.post-input-group {
+    width: 100%;
+}
+
+
+.post-input {
+    margin-bottom: 15px;
+}
+
+.post-input-btn {
+    background: dimgrey;
+    border: none;
+    margin-top: 50px;
+    padding: 10px 50px;
+}

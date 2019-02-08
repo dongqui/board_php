@@ -10,7 +10,7 @@ class Post_model extends CI_Model {
     {
         $this->db->select('PK_POST_ID');
         $this->db->select('title');
-        $this->db->select('description');
+        $this->db->select('subtitle');
         $this->db->select('content');
         $this->db->select('created_time');
     	return $this->db->get_where('post', array('PK_POST_ID'=>$postId))->row();
@@ -19,7 +19,7 @@ class Post_model extends CI_Model {
     function getList()
     {
         $this->db->select('title');
-        $this->db->select('description');
+        $this->db->select('subtitle');
         $this->db->select('content');
         $this->db->select('created_time');
         return $this->db->get_where('post', array('status_cd'=>'y'))->result();
@@ -27,11 +27,11 @@ class Post_model extends CI_Model {
 
     function add($post)
     {
-        $this->db->set('created_tiem', 'NOW()', false);
+        $this->db->set('created_time', 'NOW()', false);
         $this->db->set('updated_time', 'NOW()', false);
         $this->db->insert('POST', array(
             'title'=>$post['title'],
-            'description'=>$post['description'],
+            'subtitle'=>$post['subtitle'],
             'content'=>$post['content'],
             'userId'=>$post['userId']
         ));        
@@ -44,7 +44,7 @@ class Post_model extends CI_Model {
         $this->db->set('updated_time', 'NOW()', false);
         $this->db->update('POST', array(
             'title'=>$post['title'],
-            'description'=>$post['description'],
+            'subtitle'=>$post['subtitle'],
             'content'=>$post['content'],
         ));
     }

@@ -1,6 +1,6 @@
 <div class="post-container">
     제목: <h2><?=$post->title?></h2>
-    설명: <h2><?=$post->description?></h2>
+    설명: <h2><?=$post->subtitle?></h2>
     내용: <h2><?=$post->content?></h2>
     <a href="/index.php/post/update/<?=$post->PK_POST_ID?>"> 수정 </a>
 </div>
