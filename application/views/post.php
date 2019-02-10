@@ -1,43 +1,60 @@
-<div class="post-container">
-    제목: <h2><?=$post->title?></h2>
-    설명: <h2><?=$post->subtitle?></h2>
-    내용: <h2><?=$post->content?></h2>
-    <a href="/index.php/post/update/<?=$post->PK_POST_ID?>"> 수정 </a>
-</div>
+<div id="post-container">
+    <h1 id="post-title"><?=$post->title?></h1>
+    <h2 id="post-subtitle"><?=$post->subtitle?></h2>
+    <div class="post-info-group">
+        <p id="post-author"><?=$post->author?></p>
+        <p id="post-date"><?=$post->created_time?></p>
+        <?php if($this->session->userdata('PK_USER_ID') === $post->userId) {   ?>
+            <a class="post-update-btn" href="/index.php/post/update/<?=$post->PK_POST_ID?>"> 글 수정 </a>  /
+            <a class="post-update-btn" onclick="postDeleteHandler(event)"> 글 삭제 </a>
+        <?php } ?>
+    </div>
+    <p id="post-content" class="lead"><?=$post->content?></p>
 
-<div>
-    <ul id="post-list-container">
+
+    <ul id="comment-list-container">
+        <h3>댓글</h3>
         <?php foreach($commentList as $comment) { ?>
-            <li class="post-list" id="comment_<?=$comment->PK_COMMENT_ID?>">
-                <div class="post-list-body">
-                    <h3>
-                        <?=$comment->content?>
-                    </h3>
+            <li class="comment-list" id="comment_<?=$comment->PK_COMMENT_ID?>">
+                <p class="lead" id="comment-content"><?=$comment->content?></p>
+                <span id="comment-autor"><?=$comment->author?></span>
+                <span id="comment-date"><?=$comment->created_time?></span>
+                <?php if($this->session->userdata('PK_USER_ID') === $comment->userId) {   ?>
+                <div class="comment-update-btn-group">
+                    <span onclick="commentUpdateHandler(<?=$comment->PK_COMMENT_ID?>)" class="comment-update-btn">수정</span>  /
+                    <span onClick="commentDeleteHandler(<?=$comment->PK_COMMENT_ID?>)" class="comment-update-btn">삭제</span>
                 </div>
-                <div class="post-list-footer">
-                    <p>
-                        <?=$comment->created_time?>
-                    </p>
-                    <button onclick="commentUpdateHandler(<?=$comment->PK_COMMENT_ID?>)" class="update">update</button>
-                    <button onClick="commentDeleteHandler(<?=$comment->PK_COMMENT_ID?>)" commentId="<?=$comment->PK_COMMENT_ID?>" class="delete">delete</button>
-                </div>
+                <?php } ?>
             </li>
         <?php } ?>
     </ul>
+
+    <div id="comment-input-group">
+        <textarea id="comment-input" type="text" id="comment"></textarea>
+        <button id="comment-input-btn" class="btn btn-primary" onclick="commentAddHandler()">댓글 쓰기</button>
+    </div>
 </div>
 
-<div>
-    내용: <input type="text" id="comment" />
-    <button id="ajaxtest" onclick="commentAddHandler()">ajaxtest</button>
-</div>
+
 
 <script>
+
+    function postDeleteHandler(event) {
+        event.preventDefault();
+        if (confirm("정말 삭제 하시겠습니까?")) {
+            window.location.href = '/index.php/post/delete/<?=$post->PK_POST_ID?>'
+        }
+    }
 
     function commentAddHandler() {
         $.ajax({
             url: '/index.php/comment/add',
             type: 'POST',
-            data: {content: $('#comment').val(), postId: <?=$post->PK_POST_ID?>},
+            data: {
+                content: $('#comment-input').val(),
+                postId: <?=$post->PK_POST_ID?>,
+
+            },
             success: function (data) {
                 commentsTemplete(data);
             },
@@ -63,7 +80,7 @@
         $.ajax({
             url: '/index.php/comment/update/' + commentId ,
             type: 'POST',
-            data: {content: $('#comment').val(), postId: <?=$post->PK_POST_ID?>},
+            data: {content: $('#comment-input').val(), postId: <?=$post->PK_POST_ID?>},
             success: function (data) {
                 commentsTemplete(data);
             },
@@ -88,26 +105,27 @@
     }
 
     function commentsTemplete(data) {
-        console.log('ddd');
         let comments = JSON.parse(data);
-        $('#post-list-container').html('');
+        let PK_USER_ID = <?php echo $this->session->userdata('PK_USER_ID') ?> + "" ;
+        $('#comment-list-container').html('');
         comments.forEach(comment => {
-            $('#post-list-container').append(`
-                        <li class="post-list" id="comment_${comment.PK_COMMENT_ID}">
-                            <div class="post-list-body">
-                                <h3>
-                                    ${comment.content}
-                                </h3>
-                                <p>
-                                    ${comment.created_time}
-                                </p>
-                            </div>
-                            <div class="post-list-footer">
-                                <button onClick="commentUpdateHandler(${comment.PK_COMMENT_ID})" class="update">update</button>
-                                <button onclick="commentDeleteHandler(${comment.PK_COMMENT_ID})" commentId=${comment.PK_COMMENT_ID} class="delete">delete</button>
-                            </div>
+            $('#comment-list-container').append(`
+                        <li class="comment-list" id="comment_${comment.PK_COMMENT_ID}">
+                            <p class="lead" id="comment-content">${comment.content}</p>
+                            <span id="comment-autor">${comment.author}</span>
+                            <span id="comment-date">${comment.created_time}</span>
                         </li>
-                    `)
+             `);
+            if (PK_USER_ID === comment.userId) {
+                $(`#comment_${comment.PK_COMMENT_ID}`).append(`
+                    <div class="comment-update-btn-group">
+                        <span onclick="commentUpdateHandler(${comment.PK_COMMENT_ID})" class="comment-update-btn">수정</span>  /
+                        <span onClick="commentDeleteHandler(${comment.PK_COMMENT_ID})" class="comment-update-btn">삭제</span>
+                    </div>
+                `)
+            }
         });
+        $('#comment-input').val('')
     }
+
 </script>

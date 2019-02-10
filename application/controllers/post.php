@@ -15,7 +15,6 @@ class Post extends CI_Controller
 	public function index()
 	{
         if (!$this->session->userdata('is_login')) {
-            $this->load->helper('url');
             redirect('/auth/login');
         }
 
@@ -33,13 +32,12 @@ class Post extends CI_Controller
             'author'=> $this->session->userdata('username'),
             'userId'=>  $this->session->userdata('PK_USER_ID'));
         $post_id = $this->post_model->add($data);
-        $this->load->helper('url');
+
         redirect('/post/get/'.$post_id);
     }
 	public function get($postId)
     {
         if (!$this->session->userdata('is_login')) {
-            $this->load->helper('url');
             redirect('/auth/login');
         }
         $post=$this->post_model->get($postId);
@@ -63,8 +61,13 @@ class Post extends CI_Controller
                 'content'=> $this->input->post('content'),
                 'PK_POST_ID'=>$postId);
             $this->post_model->update($data);
-            $this->load->helper('url');
             redirect('/post/get/'.$postId);
         }
+    }
+
+    public function delete($postid)
+    {
+        $this->post_model->delete($postid);
+        redirect('/main');
     }
 }

@@ -8,20 +8,11 @@ class Post_model extends CI_Model {
 
     function get($postId)
     {
-        $this->db->select('PK_POST_ID');
-        $this->db->select('title');
-        $this->db->select('subtitle');
-        $this->db->select('content');
-        $this->db->select('created_time');
     	return $this->db->get_where('post', array('PK_POST_ID'=>$postId))->row();
     }
 
     function getList()
     {
-        $this->db->select('title');
-        $this->db->select('subtitle');
-        $this->db->select('content');
-        $this->db->select('created_time');
         return $this->db->get_where('post', array('status_cd'=>'y'))->result();
     }
 
@@ -33,7 +24,8 @@ class Post_model extends CI_Model {
             'title'=>$post['title'],
             'subtitle'=>$post['subtitle'],
             'content'=>$post['content'],
-            'userId'=>$post['userId']
+            'userId'=>$post['userId'],
+            'author'=>$post['author']
         ));        
         return $this->db->insert_id();
     }
@@ -53,6 +45,6 @@ class Post_model extends CI_Model {
     {
         $this->db->where('PK_POST_ID', $post_id);
         $this->db->set('updated_time', 'NOW()', false);
-        return $this->db->update('post', array('status_cd'=>'n'));
+        $this->db->update('post', array('status_cd'=>'n'));
     }
 }

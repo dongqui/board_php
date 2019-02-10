@@ -1,0 +1,111 @@
+#post-container {
+    width: 100%;
+    margin: 75px 0;
+    display: block;
+}
+
+#post-title {
+    font-weight: 700;
+    font-size:3em;
+    margin-top: 20px;
+    padding: 0;
+    word-break: break-all
+}
+
+#post-subtitle {
+    font-size: 2em;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: dimgrey;
+    word-break: break-all
+}
+
+#post-content {
+    word-break: break-all;
+    padding-bottom: 50px;
+    border-bottom: lightgrey 1px solid;
+}
+
+#post-author {
+    font-size: 1em;
+    font-weight: 800;
+    margin-bottom: 0;
+    color: black;
+}
+
+#post-date {
+    font-size: 1em;
+    color: dimgrey;
+    width: 100%;
+}
+
+.post-info-group {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.post-update-btn {
+    cursor: pointer;
+    font-weight: 800;
+    color: black;
+    padding: 2px;
+}
+
+#comment-autor {
+    font-weight: 400;
+    font-size: 1.5em;
+}
+
+#comment-date {
+    color: dimgrey;
+    margin-left: 10px;
+}
+
+#comment-content {
+    font-size: 1.8em;
+    margin-bottom: 0;
+}
+
+.comment-update-btn {
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.comment-update-btn-group {
+    padding-top: 5px;
+}
+#comment-list-container {
+    margin-top: 70px;
+    list-style: none;
+    padding: 0;
+}
+
+.comment-list {
+    border: lightgrey 1px solid;
+    margin: 5px 0 5px 0;
+    padding: 20px;
+}
+
+#comment-input-group {
+    width: 100%;
+    margin-top: 50px;
+    border: lightgrey 1px solid;
+}
+
+#comment-input {
+    padding: 20px;
+    height: 100px;
+    width: 100%;
+    border: none;
+}
+
+#comment-input:focus {
+    outline: none;
+}
+
+#comment-input-btn {
+    background: black;
+    width: 15%;
+    margin: 20px 20px 10px 20px;
+}

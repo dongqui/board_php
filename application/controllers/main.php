@@ -12,7 +12,7 @@ class Main extends CI_Controller
 
 	public function index()
     {
-        $postList = $this->post_model->getList('post');
+        $postList = array_reverse($this->post_model->getList('post'));
 		$this->load->view('head');
         $this->load->view('main', array('postList'=>$postList));
         $this->load->view('footer');

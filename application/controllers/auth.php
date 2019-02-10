@@ -24,7 +24,6 @@ class Auth extends CI_Controller {
         if ($user && password_verify($password, $user->password)) {
             $this->_setLoginSession($user);
         } else {
-            $this->load->helper('url');
             redirect('/auth/login');
         }
 
@@ -33,7 +32,6 @@ class Auth extends CI_Controller {
     function logout()
     {
         $this->session->sess_destroy();
-        $this->load->helper('url');
         redirect('/main');
     }
 
@@ -65,7 +63,6 @@ class Auth extends CI_Controller {
         );
         $this->session->set_userdata($sessionData);
 
-        $this->load->helper('url');
         redirect('/main');
     }
 }

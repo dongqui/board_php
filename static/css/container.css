@@ -3,10 +3,11 @@
 .container {
     margin: 0 auto;
     width: 800px;
+    overflow: scroll;
 }
 
 .body-contents {
-    height: 75vh;
+    height: 75%;
     display: flex;
     align-items: center;
     justify-content: center;

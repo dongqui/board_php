@@ -3,6 +3,7 @@
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="http://code.jquery.com/jquery.js"></script>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
                 <link href="/static/css/footer.css" rel="stylesheet">
                 <link href="/static/css/main.css" rel="stylesheet">
@@ -11,7 +12,7 @@
                 <link href="/static/css/login.css" rel="stylesheet">
                 <link href="/static/css/register.css" rel="stylesheet">
                 <link href="/static/css/nav.css" rel="stylesheet">
-                <script src="http://code.jquery.com/jquery.js"></script>
+                <link href="/static/css/post.css" rel="stylesheet">
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
             </head>

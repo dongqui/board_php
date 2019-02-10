@@ -1,11 +1,10 @@
 .nav {
     width: 100%;
     color: black;
-    border-bottom: lightgrey 1px solid;
+    border-bottom: black 2px solid;
     padding-top: 50px;
     display: block;
     padding-bottom: 20px;
-    height: 15vh;
 }
 
 .nav h2 {

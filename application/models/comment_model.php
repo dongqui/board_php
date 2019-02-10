@@ -17,8 +17,9 @@ class Comment_model extends CI_Model {
         $this->db->set('updated_time', 'NOW()', false);
         $this->db->insert('comment', array(
             'content'=>$comment['content'],
-            'userId'=>$comment['userId'],
-            'postId'=>$comment['postId']
+            'postId'=>$comment['postId'],
+            'userId'=>$this->session->userdata('PK_USER_ID'),
+            'author'=>$this->session->userdata('username')
         ));
         log_message('debug', print_r($this->getList($comment['postId']), true));
         return $this->getList($comment['postId']);

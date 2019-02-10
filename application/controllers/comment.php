@@ -17,7 +17,8 @@ class Comment extends CI_Controller
     public function add()
     {
         $data=array(
-            'userId'=>'1',
+            'userId'=>$this->session->userdata('PK_USER_ID'),
+            'autor'=>$this->session->userdata('username'),
             'postId'=>$this->input->post('postId'),
             'content'=>$this->input->post('content'),
             );
@@ -28,7 +29,6 @@ class Comment extends CI_Controller
     public function update($commentId)
     {
         $data=array(
-            'userId'=>'1',
             'postId'=>$this->input->post('postId'),
             'content'=>$this->input->post('content'),
             'PK_COMMENT_ID'=>$commentId
