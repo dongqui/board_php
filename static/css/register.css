@@ -1,5 +1,5 @@
 .register-container {
-    margin: 0 auto;
+    margin: 15% auto;
     width: 50%;
     border: lightgrey 1px solid;
     padding: 50px 50px 40px 50px;
@@ -11,6 +11,7 @@
     font-size: 1em;
     margin-bottom: 30px;
     border: none;
+    height: 30px;
     border-bottom: lightgrey 1px solid;
 }
 
@@ -24,4 +25,31 @@
     background-color: #1a1a1a;
     border: none;
     padding: 10px 0;
+    font-weight: 200;
+}
+
+#register-input-id {
+    display: inline-block;
+    font-size: 13px;
+    border: none;
+    border-bottom: lightgrey 1px solid;
+    width: 70%;
+    height: 30px;
+
+}
+
+#register-idCheck-btn {
+    background-color: black;
+    border: none;
+    font-size: 13px;
+    font-weight: 200;
+    width: 25%;
+    margin:2%;
+}
+
+#register-id-group {
+    font-size: 0;
+    width: 100%;
+    display: block;
+    margin-bottom: 30px;
 }

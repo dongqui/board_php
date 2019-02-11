@@ -1,4 +1,6 @@
 
+<!--makeMockData-->
+<!--add-->
 <form action="/index.php/post/add" class="post-input-group"  method="POST" enctype="multipart/form-data">
     <label for="post-input-title">Title</label>
     <textarea type="text" rows="1" maxlength="255" class="post-input" id="post-input-title"  name="title" > </textarea>
@@ -11,7 +13,7 @@
     <button class="btn btn-primary post-input-btn" id="post-cancel-btn " type="button" onclick="cancelHanlder()"/> 취소 </button>
 
 </form>
-<script>
+<script defer>
     function cancelHanlder() {
         const textAreas = Array.prototype.slice.call($('textarea'));
         if (textAreas.some(textarea => textarea.value.length > 1 )) {
