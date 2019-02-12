@@ -22,12 +22,10 @@
 </div>
 
 <script defer>
-
-
-    function checkIdDuplication(registerIdmanage) {
+    function checkIdDuplication() {
         let userId = $('#register-input-id').val();
         $.ajax({
-            url: '/index.php/auth/IDcheck',
+            url: '/index.php/auth/userIdCheck',
             type: 'POST',
             data: { userId }
             success: function (isPossible) {
@@ -42,13 +40,4 @@
             }
         });
     }
-
-    function checkRegisterVaild() {
-        if ($('#register-input-password') !== $('#registerinput-passwordCheck')) {
-            alert('비밀번호가 일치하지 않습니다');
-            return;
-        }
-
-        if()
-            }
 </script>

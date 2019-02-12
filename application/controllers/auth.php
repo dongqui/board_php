@@ -65,7 +65,7 @@ class Auth extends CI_Controller {
 
 
 
-    function IDcheck()
+    function userIdCheck()
     {
         $userId = $this->input->post('userId');
         $user = $this->user_model->getByUserId($userId);

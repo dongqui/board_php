@@ -76,7 +76,7 @@
 
             },
             success: function (data) {
-                commentsTemplete(data);
+                appendCommentsTemplate(data);
             },
             error: function (data) {
                 alert(data);
@@ -86,7 +86,6 @@
 
     function commentUpdateHandler(commentId) {
         $(`#comment-input-update`).val($(`#comment-content_${commentId}`).text());
-        console.log($(`#comment-content_${commentId}`));
         $(`#modal-update-btn`).attr('commentId', commentId);
     }
 
@@ -98,7 +97,7 @@
             data: {content: $('#comment-input-update').val(), post_fk_Id: <?=$post->PK_POST_ID?>},
             success: function (data) {
                 $('#comment-input-update').val('');
-                commentsTemplete(data);
+                appendCommentsTemplate(data);
             },
             error: function (data) {
                 alert(data);
@@ -107,12 +106,18 @@
     }
 
     function commentDeleteHandler(commentId) {
+        if (confirm("정말 삭제 하시겠습니까?")) {
+            commentDeleteRequestHandler(commentId);
+        }
+    }
+
+    function commentDeleteRequestHandler(commentId) {
         $.ajax({
             url: "/index.php/comment/delete/" + commentId,
             type: 'POST',
             data: {post_fk_Id: <?=$post->PK_POST_ID?>},
             success: function (data) {
-                commentsTemplete(data);
+                appendCommentsTemplate(data);
             },
             error: function (data) {
                 alert(data);
@@ -120,7 +125,7 @@
         });
     }
 
-    function commentsTemplete(data) {
+    function appendCommentsTemplate(data) {
         let comments = JSON.parse(data);
         let PK_USER_ID = <?php echo $this->session->userdata('PK_USER_ID') ?> + "" ;
         $('#comment-list-container').html('<h3>댓글</h3>');
@@ -143,5 +148,6 @@
         });
         $('#comment-input').val('')
     }
+
 
 </script>

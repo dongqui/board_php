@@ -25,7 +25,7 @@
     (function() {
         let offsetPage = 1;
         let count = <?=$count?>;
-        let requestWithThrottle = throttle(requestHandlerWithScroll, 500);
+        const requestWithThrottle = throttle(requestHandlerWithScroll, 500);
         $(window).scroll(function() {
             if ($(window).scrollTop() === $(document).height() - $(window).height() && offsetPage <= count) {
                 requestWithThrottle(offsetPage, function(){offsetPage++});
@@ -76,6 +76,7 @@
 
     function throttle(func, time) {
         let wait = false;
+
         return function() {
             if (!wait) {
                 wait = true;

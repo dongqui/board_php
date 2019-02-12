@@ -22,7 +22,7 @@
 }
 
 #post-content {
-    word-break: break-all;
+    white-space: pre-wrap;
     padding-bottom: 50px;
     border-bottom: lightgrey 1px solid;
 }
