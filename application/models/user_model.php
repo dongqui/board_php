@@ -27,4 +27,6 @@ class User_model extends CI_Model {
         $user = $this->db->get_where('USER', array('userId' => $userId))->row();
         return $user;
     }
+
+
 }

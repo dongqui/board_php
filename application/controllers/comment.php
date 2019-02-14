@@ -9,9 +9,9 @@ class Comment extends CI_Controller
         $this->load->model('comment_model');
     }
 
-    public function getList($postId)
+    public function getList($post_fk_Id)
     {
-        return $this->comment_model->getList($postId);
+        return $this->comment_model->getList($post_fk_Id);
     }
 
     public function add()
@@ -20,13 +20,17 @@ class Comment extends CI_Controller
             redirect('/auth/login');
         }
         $data=array(
-            'userId'=>$this->session->userdata('PK_USER_ID'),
-            'autor'=>$this->session->userdata('username'),
-            'postId'=>$this->input->post('postId'),
+            'user_fk_Id'=>$this->session->userdata('PK_USER_ID'),
+            'post_fk_Id'=>$this->input->post('post_fk_Id'),
             'content'=>$this->input->post('content'),
             );
         $comments=$this->comment_model->add($data);
         echo json_encode($comments);
+    }
+
+    public function getCount()
+    {
+
     }
 
     public function update($commentId)
@@ -35,7 +39,7 @@ class Comment extends CI_Controller
             redirect('/auth/login');
         }
         $data=array(
-            'postId'=>$this->input->post('postId'),
+            'post_fk_Id'=>$this->input->post('post_fk_Id'),
             'content'=>$this->input->post('content'),
             'PK_COMMENT_ID'=>$commentId
         );
@@ -48,8 +52,9 @@ class Comment extends CI_Controller
         if (!$this->session->userdata('is_login')) {
             redirect('/auth/login');
         }
-        $postId=$this->input->post('postId');
-        $comments=$this->comment_model->delete($commentId, $postId);
+        $post_fk_Id=$this->input->post('post_fk_Id');
+        $comments=$this->comment_model->delete($commentId, $post_fk_Id);
+
         echo json_encode($comments);
     }
 }

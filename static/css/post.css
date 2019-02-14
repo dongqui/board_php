@@ -22,7 +22,7 @@
 }
 
 #post-content {
-    word-break: break-all;
+    white-space: pre-wrap;
     padding-bottom: 50px;
     border-bottom: lightgrey 1px solid;
 }
@@ -62,7 +62,7 @@
     margin-left: 10px;
 }
 
-#comment-content {
+.comment-content {
     font-size: 1.8em;
     margin-bottom: 0;
 }
@@ -93,7 +93,7 @@
     border: lightgrey 1px solid;
 }
 
-#comment-input {
+.comment-input {
     padding: 20px;
     height: 100px;
     width: 100%;
@@ -108,4 +108,5 @@
     background: black;
     width: 15%;
     margin: 20px 20px 10px 20px;
+    border: none;
 }

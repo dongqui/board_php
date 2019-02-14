@@ -29,12 +29,24 @@ class Post extends CI_Controller
             'title'=> $this->input->post('title'),
             'subtitle'=> $this->input->post('subtitle'),
             'content'=> $this->input->post('content'),
-            'author'=> $this->session->userdata('username'),
-            'userId'=>  $this->session->userdata('PK_USER_ID'));
+            'user_fk_Id'=>  $this->session->userdata('PK_USER_ID'));
         $post_id = $this->post_model->add($data);
 
         redirect('/post/get/'.$post_id);
     }
+
+//    public function makeMockData()
+//    {
+//        $data=array(
+//            'title'=> $this->input->post('title'),
+//            'subtitle'=> $this->input->post('subtitle'),
+//            'content'=> $this->input->post('content'),
+//            'user_fk_Id'=>  $this->session->userdata('PK_USER_ID'));
+//        for ($i = 1; $i <= 100; $i++) {
+//            $this->post_model->add($data);
+//        }
+//    }
+
 	public function get($postId)
     {
         if (!$this->session->userdata('is_login')) {
