@@ -16,6 +16,9 @@ class Comment extends CI_Controller
 
     public function add()
     {
+        if (!$this->session->userdata('is_login')) {
+            redirect('/auth/login');
+        }
         $data=array(
             'userId'=>$this->session->userdata('PK_USER_ID'),
             'autor'=>$this->session->userdata('username'),
@@ -28,6 +31,9 @@ class Comment extends CI_Controller
 
     public function update($commentId)
     {
+        if (!$this->session->userdata('is_login')) {
+            redirect('/auth/login');
+        }
         $data=array(
             'postId'=>$this->input->post('postId'),
             'content'=>$this->input->post('content'),
@@ -39,6 +45,9 @@ class Comment extends CI_Controller
 
     public function delete($commentId)
     {
+        if (!$this->session->userdata('is_login')) {
+            redirect('/auth/login');
+        }
         $postId=$this->input->post('postId');
         $comments=$this->comment_model->delete($commentId, $postId);
         echo json_encode($comments);

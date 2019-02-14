@@ -49,6 +49,9 @@ class Post extends CI_Controller
 
     public function update($postId)
     {
+        if (!$this->session->userdata('is_login')) {
+            redirect('/auth/login');
+        }
         if (!$this->input->post()) {
             $post = $this->post_model->get($postId);
             $this->load->view('head');
@@ -67,6 +70,9 @@ class Post extends CI_Controller
 
     public function delete($postid)
     {
+        if (!$this->session->userdata('is_login')) {
+            redirect('/auth/login');
+        }
         $this->post_model->delete($postid);
         redirect('/main');
     }
